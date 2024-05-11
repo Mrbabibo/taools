@@ -14,7 +14,7 @@ function html(currentValue) {
             const pinyinText = pinyin(c);
             tagsArray.push(`<ruby onclick="hanziWriter('${c}')">${safeC}<rt>${pinyinText}</rt></ruby>`);
         } else if (c === '\n' || c === '\r' || c === '\t' || c === ' ' || c === '\n\r') {
-            tagsArray.push('<br>');
+            tagsArray.push(' ');
         } else {
             tagsArray.push(safeC);
         }
@@ -23,7 +23,9 @@ function html(currentValue) {
     return tagsArray.join('');
 }
 // 汉字笔画
+
 function hanziWriter(text) {
+    document.getElementById('character-target').innerHTML = '';
     const writer = HanziWriter.create('character-target', text, {
         width: 200,
         height: 200,
@@ -32,6 +34,7 @@ function hanziWriter(text) {
         radicalColor: '#f00', // 如果支持部首着色
         showOutline: true,
     });
+    // writer.setCharacter(character)
     // writer.animateCharacter(); // 开始播放笔画动画
     writer.quiz({
         onMistake: function (strokeData) {
@@ -54,8 +57,8 @@ function hanziWriter(text) {
 }
 
 function handleInputChange(event) {
-    const inputElement = event.target;
-    const currentValue = inputElement.value;
+    // const inputElement = event.target;
+    const currentValue = document.querySelector('#textarea').value;
     document.querySelector('#content').innerHTML = html(currentValue);
 
     // 在这里处理输入值的变化逻辑
@@ -63,4 +66,5 @@ function handleInputChange(event) {
 function cls() {
     document.querySelector('#textarea').value = '';
     document.querySelector('#content').innerHTML = '';
+    document.getElementById('character-target').innerHTML = '';
 }

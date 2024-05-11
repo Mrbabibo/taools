@@ -1,109 +1,114 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+
+        <title>Taools</title>
+
+        <link rel="stylesheet" id="templatecss" type="text/css" href="css/pink.css" />
         <script src="./js/hanzi-writer.min.js"></script>
         <script src="./js/jsonindex.js"></script>
     </head>
+
     <body>
-        <article>
-            <p>
-                <textarea id="textarea" rows="15" style="height: 200px; width: 500px" oninput="handleInputChange(event)" placeholder="请输入您要合成的文本">
-              春江花月夜
-    春江潮水连海平，海上明月共潮生。
-    滟滟随波千万里，何处春江无月明。
-    江流宛转绕芳甸，月照花林皆似霰。
-    空里流霜不觉飞，汀上白沙看不见。
-    江天一色无纤尘，皎皎空中孤月轮。
-    江畔何人初见月？江月何年初照人？
-    人生代代无穷已，江月年年望相似。
-    不知江月待何人，但见长江送流水。
-    白云一片去悠悠，青枫浦上不胜愁。
-    谁家今夜扁舟子？何处相思明月楼？
-    可怜楼上月徘徊，应照离人妆镜台。
-    玉户帘中卷不去，捣衣砧上拂还来。
-    此时相望不相闻，愿逐月华流照君。
-    鸿雁长飞光不度，鱼龙潜跃水成文。
-    昨夜闲潭梦落花，可怜春半不还家。
-    江水流春去欲尽，江潭落月复西斜。
-    斜月沉沉藏海雾，碣石潇湘无限路。
-    不知乘月几人归，落月摇情满江树。
-  </textarea
+        <div class="white-pink">
+            <h1>
+                Taools
+
+                <span>wellcome to taools</span>
+            </h1>
+            <label>
+                <span>内容 :</span>
+
+                <textarea id="textarea" rows="15" style="height: 200px" placeholder="请输入您要合成的文本">
+                    春江花月夜
+            春江潮水连海平，海上明月共潮生。
+            滟滟随波千万里，何处春江无月明。
+            江流宛转绕芳甸，月照花林皆似霰。
+            空里流霜不觉飞，汀上白沙看不见。
+            江天一色无纤尘，皎皎空中孤月轮。
+            江畔何人初见月？江月何年初照人？
+            人生代代无穷已，江月年年望相似。
+            不知江月待何人，但见长江送流水。
+            白云一片去悠悠，青枫浦上不胜愁。
+            谁家今夜扁舟子？何处相思明月楼？
+            可怜楼上月徘徊，应照离人妆镜台。
+            玉户帘中卷不去，捣衣砧上拂还来。
+            此时相望不相闻，愿逐月华流照君。
+            鸿雁长飞光不度，鱼龙潜跃水成文。
+            昨夜闲潭梦落花，可怜春半不还家。
+            江水流春去欲尽，江潭落月复西斜。
+            斜月沉沉藏海雾，碣石潇湘无限路。
+            不知乘月几人归，落月摇情满江树。
+        </textarea
                 >
-            </p>
+            </label>
 
-            <div>
+            <label>
+                <span>语速 :</span>
+
+                <input id="speed" type="text" value="50" placeholder="[0-100]" />
+            </label>
+            <label>
+                <span>音量 :</span>
+
+                <input id="volume" type="text" value="50" placeholder="[0-100]" />
+            </label>
+
+            <label>
+                <span>音高 :</span>
+
+                <input id="pitch" type="text" value="50" placeholder="[0-100]" />
+            </label>
+            <label>
+                <span>发音人 :</span>
+
+                <select id="vcn" name="selection">
+                    <option value="xiaoyan">xiaoyan</option>
+                    <option value="xiaoyu">xiaoyu</option>
+                    <option value="xiaofeng">xiaofeng</option>
+                    <option value="xiaoqi">xiaoqi</option>
+                    <option value="catherine">catherine</option>
+                    <option value="mary">mary</option>
+                </select>
+            </label>
+
+            <label>
+                <span>&nbsp;</span>
+
                 <div>
-                    语速([0-100])：
-                    <input id="speed" value="50" />
+                    <button id="controll_tts" class="button">立即合成</button>
+                    <button onclick="handleInputChange()" class="button">标注拼音</button>
+                    <button onclick="cls()" class="button">初始化</button>
+                    <!-- <button id="download_pcm">下载pcm</button>
+                        <button id="download_wav">下载wav</button> -->
                 </div>
-                <div>
-                    音量([0-100])：
-                    <input id="volume" value="50" />
-                </div>
-                <div>
-                    音高([0-100])：
-                    <input id="pitch" value="50" />
-                </div>
-                <div>
-                    发音人：
+            </label>
+            <label>
+                <section class="wordpop">
+                    <div id="content" class="flex2"></div>
+                    <div class="border flex1">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="character-target">
+                            <line x1="0" y1="0" x2="200" y2="0" stroke="#DDD"></line>
+                            <line x1="0" y1="0" x2="0" y2="200" stroke="#DDD"></line>
+                            <line x1="0" y1="200" x2="200" y2="200" stroke="#DDD"></line>
+                            <line x1="200" y1="0" x2="200" y2="200" stroke="#DDD"></line>
 
-                    <select id="vcn">
-                        <option value="xiaoyan">xiaoyan</option>
-                        <option value="xiaoyu">xiaoyu</option>
-                        <option value="xiaofeng">xiaofeng</option>
-                        <option value="xiaoqi">xiaoqi</option>
-                        <option value="catherine">catherine</option>
-                        <option value="mary">mary</option>
-                    </select>
-                </div>
-                <!-- x4_lingxiaolu_en -->
-                <div>
-                    小语种(泰语)：
-                    <input id="tte" type="checkbox" />
-                </div>
-                <div>注意：发音人与语种会关联，小语种需要开通指定发音人</div>
-            </div>
-            <div>
-                <button id="controll_tts">立即合成</button>
-                <button onclick="cls()">清空文文字</button>
-                <button id="download_pcm">下载pcm</button>
-                <button id="download_wav">下载wav</button>
-            </div>
-        </article>
-
-        <section>
-            <div id="content"></div>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="character-target">
-                <line x1="0" y1="0" x2="200" y2="0" stroke="#DDD"></line>
-                <line x1="0" y1="0" x2="0" y2="200" stroke="#DDD"></line>
-                <line x1="0" y1="200" x2="200" y2="200" stroke="#DDD"></line>
-                <line x1="200" y1="0" x2="200" y2="200" stroke="#DDD"></line>
-
-                <line x1="0" y1="100" x2="200" y2="100" stroke="#DDD"></line>
-                <line x1="100" y1="0" x2="100" y2="200" stroke="#DDD"></line>
-                <line x1="0" y1="0" x2="200" y2="200" stroke="#DDD"></line>
-                <line x1="0" y1="200" x2="200" y2="0" stroke="#DDD"></line>
-            </svg>
-        </section>
-        <div></div>
-
-        <p>
-            在线语音合成如何在指定的文本处标记静音停顿？ 答：有如下两种设置方式，详细可以参考论坛说明： cssml方法：
-            （1）对于发音人xiaoyan、xiaoyu、xiaofeng、xiaoqi、catherine、mary需使用cssml方法进行静音标记,并且不支持unicode文本编码。 （2）在business中添加参数ttp值为cssml。 （3）在指定文本位置添加静音标记，如：风
-            <break time="500ms" />
-            轻轻摇着树梢。 简单标记方法： （1）“除去”cssml方法列举的发音人以外，均可以使用简单标记法。 （2）在指定文本位置添加静音标记，如：你好[p500]科大讯飞。
-        </p>
-
-        <div id="result"></div>
-        <script src="./js/base64.js"></script>
-        <script src="./js/crypto-js.js"></script>
-        <script src="./js//index.umd.js"></script>
-        <script src="./js/index.js"></script>
-        <script src="./js/index2.js"></script>
+                            <line x1="0" y1="100" x2="200" y2="100" stroke="#DDD"></line>
+                            <line x1="100" y1="0" x2="100" y2="200" stroke="#DDD"></line>
+                            <line x1="0" y1="0" x2="200" y2="200" stroke="#DDD"></line>
+                            <line x1="0" y1="200" x2="200" y2="0" stroke="#DDD"></line>
+                        </svg> -->
+                        <div style="width: 200px; height: 200px" id="character-target"></div>
+                    </div>
+                </section>
+            </label>
+        </div>
     </body>
+    <script src="./js/base64.js"></script>
+    <script src="./js/crypto-js.js"></script>
+    <script src="./js//index.umd.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/index2.js"></script>
 </html>
